@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+   <% clucks.forEach(element => {%>
+    <div class="card mx-auto my-4" style="width: 90%">
+        <div class="card-body d-flex">
+            <img src="/images/welcome.jpeg" alt="hen" style="width: 50px;height:50px" class=" bd-highlight mx-3">
+            <div>
+                <h5 class="card-title text-black-50"><%= element.username + ' \u2219 ' + element.creatTime%></h5>
+                <p class="card-text text-black-50"><%= element.content%></p>
+                <% if(element.image_url != ''){%>
+                <img style="width: 100%;height:250px" src="<%= element.image_url%>" alt="">
+                <%}%>
+            </div>
+        </div>
+    </div> 
+</div>
+    <%})%>
+      
+    <%if(clucks.length===0){%>
+        <h4 class="text-center">Please add new clucks to start</h4>
+     <%}%>
+
+<%- include('../partials/footer') %>
