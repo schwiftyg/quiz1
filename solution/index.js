@@ -57,9 +57,7 @@ app.use((req,res, next) => {
   res.locals.username = username;
   next();
 })
-
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+ 
 
 app.get('/', (req, res) => {  
   res.redirect('/clucks')
@@ -71,6 +69,10 @@ app.use('/user',userRouter);
 const clucksRouter = require("./routes/clucks");
 app.use("/clucks", clucksRouter)
 
+const trendRouter = require("./routes/trend");
+app.use("/trend", trendRouter)
+
+/*
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -86,6 +88,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+*/
 
 //Add server Domain and Host:
 const PORT = 5858;

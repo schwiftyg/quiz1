@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -34,3 +34,26 @@ a {
 .nav.nav-tabs{
     border: 0 none;
 }
+/* Create two columns/boxes that floats next to each other */
+trend {
+  float: left;
+  width: 25%; 
+  padding: 20px;
+  height: 100%;
+  
+}
+clucks {
+  float: left;
+  padding: 20px;
+  width: 70%;
+   
+}
+@media (max-width: 600px) {
+    trend{
+        display: none;
+    }
+    clucks {
+    width: 100%;
+    height: auto;    
+   }
+} 

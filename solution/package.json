@@ -12,6 +12,7 @@
     "dbcreate": "createdb --echo Cluckr",
     "migrate_create": "knex migrate:make clucks",
     "migrate": "knex migrate:latest",
+    "migrate_trending": "knex migrate:make trending",
     "seed_create": "knex seed:make clucks",
     "seed": "knex seed:run",
     "demo_image": "concurrently \"npm start\" \"xdg-open http://localhost:5858/clucks/demo/0 \"",

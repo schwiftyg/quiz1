@@ -31,7 +31,7 @@ router.use((req,res,next)=>{
   })
 
 
-router.post('/signin',(req,res)=>{
+router.post('/sign_in',(req,res)=>{
     const COOKIE_EXPIRE = 1000 * 60 * 60 * 24 * 7;
     const username = req.body.username; 
     res.cookie('username', username, { maxAge: COOKIE_EXPIRE });

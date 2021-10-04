@@ -1,48 +1,77 @@
-//Steps
-//Create a route for todos
-//Query the db with knex to get all todos
-//Render index view with todos that we got back
-
-//So inside the routes directory we create this new file for todos routes, and we call it todosRouter
-//The name of this router comes from the table name within our database called "todos"
-//Add out first route 
-
 const express = require('express');
-const knex = require('../db/client'); //this allows us to interact with the db
-
-//we are only using the route functionality from express
-//so we don't need to create the initial of express
-//but the initial of express.Router
+const knex = require('../db/client'); 
 const router = express.Router();
 
-//NAME: todos#index, METHOD: GET, PATH: /todos
 router.get('/', (req, res) => {
-    //Query the db with knex to get all the todos
-    //knex.select(*).from('todos').then(...) <- this works, but it's easier to write the line below:
-    knex('clucks')
+     knex('clucks')
     .orderBy("created_at", "desc")
     .then(data => {
         data.forEach(element => {
             element.creatTime = returnTime(element.created_at);
         });
-        res.render("clucks/index", {
-            username: req.cookies.username,
-            clucks: data,
-        });
+        knex('trending')
+            .select('*')
+            .orderBy('count','desc')
+            .returning('*')
+            .then((trend)=>{
+                res.render("clucks/index", {
+                    username: req.cookies.username,
+                    clucks: data,
+                    trend:  trend,
+                });
+            })
+       
     })
 })
-
-//get the new page to create a new todo item
+ 
 router.get('/new', (req, res) => {
     res.render("clucks/new");
 })
 
-//post the data that is entered into the new todo item form
 router.post('/', (req, res) => {
-    //all the data fro the form is going to be stored inside req.body
-    //it has to be a todo req
+    
     console.log(req.body);
-    let username=req.cookies.username || 'anonymous';
+    let username=req.cookies.username ;
+
+    let trendArr=[];
+    if(req.body.content.includes("#")){
+        let contentArr=req.body.content.split(" ")
+        for(let x of contentArr){
+            if(x.includes("#")){
+                trendArr.push(x)
+            }
+        }
+        for(let x of trendArr){
+            knex('trending')
+                .select('*')
+                .where('trend','like', x)
+                .then((record)=>{
+                    if(record.length===0){
+                        knex('trending')
+                        .insert({
+                            trend:`${x}`,
+                            count:1
+                        })
+                        .returning("*")
+                        .then(()=>{
+                            return "inserted new trend"
+                        })
+                    }else{
+                        let count=record[0].count+1;
+                        knex('trending')
+                        .where('trend','ilike',x)
+                        .update({
+                            count:count
+                        })
+                        .returning('*')
+                        .then((record)=>{
+                              console.log(record)
+                        })
+                    }
+                })
+        }
+    }
+
     knex('clucks')
     .insert({
        username: username,      
@@ -90,6 +119,46 @@ router.get('/:id/edit', (req,res) => {
 router.patch('/:id', (req, res) => {
     console.log(req.body);
     console.log(req.params);
+
+    let trendArr=[];
+    if(req.body.content.includes("#")){
+        let contentArr=req.body.content.split(" ")
+        for(let x of contentArr){
+            if(x.includes("#")){
+                trendArr.push(x)
+            }
+        }
+        for(let x of trendArr){
+            knex('trending')
+                .select('*')
+                .where('trend','like', x)
+                .then((record)=>{
+                    if(record.length===0){
+                        knex('trending')
+                        .insert({
+                            trend:`${x}`,
+                            count:1
+                        })
+                        .returning("*")
+                        .then(()=>{
+                            return "inserted new trend"
+                        })
+                    }else{
+                        let count=record[0].count+1;
+                        knex('trending')
+                        .where('trend','ilike',x)
+                        .update({
+                            count:count
+                        })
+                        .returning('*')
+                        .then((record)=>{
+                              console.log(record)
+                        })
+                    }
+                })
+        }
+    }
+
     knex("clucks")
     .where("id", req.params.id)
     .update(
@@ -102,6 +171,9 @@ router.patch('/:id', (req, res) => {
         res.redirect(`/clucks/${req.params.id}`)
     })
 })
+
+
+
 
 // replace faker demo image from unsplash
 router.get('/demo/:id', function (req, res) {      
@@ -173,7 +245,7 @@ function returnTime(date) {
             result = "1 day ago";
         }
     } else {
-        result = "too long ago";
+        result = "long time ago";
     }
     return result;
 }
