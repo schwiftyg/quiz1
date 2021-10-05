@@ -6,8 +6,10 @@
     <%= clucks.content %> 
 </p>
 
+
 <img src='<%= clucks.image_url %> ' alt="clucks item image" srcset="" style="max-width: 300px;" >
 <p>
+<%if( username == clucks.username){%>
 <a href="/clucks/<%- clucks.id%>/edit" class="btn btn-outline-success btn-block my-1">
     Edit
 </a>
@@ -16,7 +18,7 @@
     <input type="hidden" name="_method" value="DELETE">
     <input type="submit" value="Delete" class="btn btn-outline-danger btn-block">
 </form>
-
+<%}%>
 <p>
     <a href="/clucks/" class="btn btn-primary text-primary bg-light col-12 mt-4">
         Goto List

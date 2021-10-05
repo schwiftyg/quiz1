@@ -14,7 +14,7 @@
                 <img src="/images/welcome.jpeg" alt="hen" style="width: 50px;height:50px" class=" bd-highlight mx-3">
                 <div>
                     <h5 class="card-title text-black-50"><%= element.username + ' \u2219 ' + element.creatTime%></h5>
-                    <p class="card-text text-black-50"><%= element.content%></p>
+                    <p class="card-text text-black-50"><a href="\clucks\<%= element.id%>"><%= element.content%></a></p>
                     <% if(element.image_url != ''){%>
                     <img style="width: 100%;height:250px" src="<%= element.image_url%>" alt="">
                     <%}%>

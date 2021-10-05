@@ -98,12 +98,46 @@ router.get('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
     console.log(id);
-    knex('clucks')
-    .where("id", id)
-    .del()
-    .then(() => {
-        res.redirect('/clucks')
+    knex("clucks")
+    .where("id", req.params.id)
+    .then(data => {
+        console.log(data[0].content);
+        let trendArr=[];
+        if(data[0].content.includes("#")){
+            let contentArr=data[0].content.split(" ")
+            for(let x of contentArr){
+                if(x.includes("#")){
+                    trendArr.push(x)
+                }
+            }
+            for(let x of trendArr){        
+                //let count=record[0].count-1;
+                knex('trending')
+                .select('*')
+                .where('trend','like', x)
+                .then((record)=>{
+                    let count=record[0].count-1;
+                    knex('trending')
+                    .where('trend','ilike',x)
+                    .update({
+                        count:count
+                    })
+                    .returning('*')
+                    .then((record)=>{
+                            console.log(record)
+                    })  
+                }) 
+            }
+        }
+
+        knex('clucks')
+        .where("id", id)
+        .del()
+        .then(() => {
+            res.redirect('/clucks')
+        })
     })
+
 })
 
 //route to get the edit page
@@ -119,8 +153,41 @@ router.get('/:id/edit', (req,res) => {
 router.patch('/:id', (req, res) => {
     console.log(req.body);
     console.log(req.params);
+    /// delete old trending first, then add new trending 
+    knex("clucks")
+    .where("id", req.params.id)
+    .then(data => {
+    
+        let trendArr=[];
+        if(data[0].content.includes("#")){
+            let contentArr=data[0].content.split(" ")
+            for(let x of contentArr){
+                if(x.includes("#")){
+                    trendArr.push(x)
+                }
+            }
+            for(let x of trendArr){        
+                //let count=record[0].count-1;
+                knex('trending')
+                .select('*')
+                .where('trend','like', x)
+                .then((record)=>{
+                    let count=record[0].count-1;
+                    knex('trending')
+                    .where('trend','ilike',x)
+                    .update({
+                        count:count
+                    })
+                    .returning('*')
+                    .then((record)=>{
+                            console.log(record)
+                    })  
+                }) 
+            }
+        }
+    })    
 
-    let trendArr=[];
+    trendArr=[];
     if(req.body.content.includes("#")){
         let contentArr=req.body.content.split(" ")
         for(let x of contentArr){
