@@ -1,0 +1,48 @@
+{
+  "name": "clucks",
+  "version": "0.0.1",
+  "description": "[Quiz1] clucks",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon",
+    "init": "npm init",
+    "install": "npm i ejs express knex method-override pg",
+    "install-d": "npm i -D concurrently faker http-server morgan nodemon",
+    "dbcreate": "createdb --echo Cluckr",
+    "migrate_create": "knex migrate:make clucks",
+    "migrate": "knex migrate:latest",
+    "migrate_trending": "knex migrate:make trending",
+    "seed_create": "knex seed:make clucks",
+    "seed": "knex seed:run",
+    "demo_image": "concurrently \"npm start\" \"xdg-open http://localhost:5858/clucks/demo/0 \"",
+    "backup": "pg_dump -U harry -F c -b -v -f \"db/seeds/demo_data_backup\" Cluckr",
+    "restore": "pg_restore -U harry Cluckr -v \"db/seeds/demo_data_backup\""
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "debug": "^2.6.9",
+    "ejs": "^3.1.6",
+    "express": "^4.16.4",
+    "http-errors": "^1.6.3",
+    "knex": "^0.95.11",
+    "method-override": "^3.0.0",
+    "pg": "^8.7.1"
+  },
+  "devDependencies": {
+    "concurrently": "^6.3.0",
+    "faker": "^5.5.3",
+    "http-server": "^13.0.2",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.13"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harryji168/quiz1/tree/solution"
+  },
+  "keywords": [
+    "codecore, quiz, clucks"
+  ],
+  "author": "Harry Ji",
+  "license": "ISC"
+}

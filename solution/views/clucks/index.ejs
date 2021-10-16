@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+<section >
+  <trend class="d-none d-md-block m-6 border rounded">
+     <h3><a href="/clucks">Trending Clucks</a></h3>
+     <% trend.forEach(element => {%>
+        <a href="/trend/<%= element.trend.substr(1)%>"> 
+        <%= element.trend%></a> - <%= element.count%><br>
+     <%})%>   
+  </trend>
+  <clucks class="m-3 border rounded">
+    <% clucks.forEach(element => {%>
+        <div class="card mx-auto m-3"  >
+            <div class="card-body d-flex">
+                <img src="/images/welcome.jpeg" alt="hen" style="width: 50px;height:50px" class=" bd-highlight mx-3">
+                <div>
+                    <h5 class="card-title text-black-50"><a href="\clucks\<%= element.id%>"><%= element.username + ' \u2219 ' + element.creatTime%></a></h5>
+                    <p class="card-text text-black-50"><%= element.content%></p>
+                    <% if(element.image_url){%>
+                        <a href="\clucks\<%= element.id%>">
+                        <img style="width: 100%;height:250px" src="<%= element.image_url%>" alt="">
+                        </a>
+                    <%}%>
+                </div>
+            </div>
+        </div> 
+    
+        <%})%>
+    </clucks>
+</section>
+
+<%- include('../partials/footer') %>
+
+

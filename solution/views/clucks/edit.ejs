@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+<h1>Edit Clucks</h1>
+    <form action="/clucks/<%= cluck.id%>" method="POST">
+            <!-- rename(override) this POST request to a PATCH request  -->
+            <input type="hidden" name="_method" value="PATCH"> 
+        <div class="border border-secondary rounded m-4 p-4">
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea autofocus class="form-control" id="content" name="content" rows="3" placeholder="Watchoo cluckin' 'bout?" required><%= cluck.content %></textarea>
+            </div>
+            <div class="form-group mt-4">
+                <label for="image_url">Image Url</label>
+                <input type="url" class="form-control" name="image_url" id="image_url" placeholder="e.g.https://www.example.com/some.png" value="<%= cluck.image_url %>">
+            </div>
+        <button type="submit" class="btn btn-secondary float-right mt-4 ">Edit</button>
+        <br/>
+        </div>
+    </form>  
+    <p>
+        <a href="/clucks/" class="btn btn-primary text-primary bg-light col-12 mt-4">
+            Goto List
+        </a>
+<%- include('../partials/footer') %>
