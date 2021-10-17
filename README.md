@@ -18,9 +18,9 @@ Feature	Mark	Notes
 - Sort them by their counter field in a descending order.	❌	
 
 
-##### no agreee 
+##### I do not agreee 
 
-I done the trending tag#  done trending tag# show in desktop layout  and hide trending tag#  in mobile
+I made the trending tag#  show up in the desktop layout  and hid the  trending tag#  in the mobile layout
 
 
 ![Screenshot from 2021-10-16 07-34-15](https://user-images.githubusercontent.com/21187699/137592161-15e7364f-c3cc-488d-a9f4-b165a3aa3c91.png)
@@ -28,7 +28,7 @@ I done the trending tag#  done trending tag# show in desktop layout  and hide tr
 ![Screenshot from 2021-10-16 07-36-28](https://user-images.githubusercontent.com/21187699/137592156-ab59d5db-8ed4-4106-a2ff-e911559ade41.png)
 
 
- and also have link for tag#, when click, it will filter the clunks.
+ I also have the link for the tag# that when clicked,  will filter the clucks.
  
  ![Screenshot from 2021-10-16 07-37-07](https://user-images.githubusercontent.com/21187699/137592184-6ffa1ddf-51d0-4ba7-88fb-eacf7118d4f6.png)
  
@@ -40,7 +40,7 @@ I done the trending tag#  done trending tag# show in desktop layout  and hide tr
   
   Morgan shouldn't be installed as dev dependency. Partial mark assigned.
   
-  ##### not aggree
+  ##### I do not agree
   
   Morgan should just use in development
   
@@ -52,7 +52,7 @@ I done the trending tag#  done trending tag# show in desktop layout  and hide tr
   ##### not agree
   
   
-  I redirect a full control page, include back to index list, also include " Edit" and "Delete" feature.   this not required by quiz instruction, but it should hidden features that need include in the quiz, because the database->clucks table,  have updated_at fields, if don't have this feature, then this field will be no use.
+  I redirected a full control page, included back to index list and also included the "Edit" and "Delete" feature.   This was not required by the quiz instruction but it needed to be included because the database->clucks table had updated_at fields. If there wasn't this feature, then this field will be of no use.
   
   
   
@@ -65,7 +65,7 @@ I done the trending tag#  done trending tag# show in desktop layout  and hide tr
   
   #### Error signing out. Partial mark assigned.
   
-  I have error process include , it is ok lost mark.
+  I have error process included, it is ok to have lost this mark.
     
   
   ![Screenshot from 2021-10-16 08-03-41](https://user-images.githubusercontent.com/21187699/137592361-281cb469-0778-4d14-ad16-f0593df5aa28.png)
